@@ -1,0 +1,41 @@
+h1 {
+  position: relative;
+  font-size: 40px;
+}
+
+#container {
+  background-color: white;
+  margin: auto;
+  height: 600px;
+  width: 900px;
+}
+
+#sidebar {
+  float: left;
+  height: 500px;
+  width: 20%;
+  background-color: pink;
+}
+
+#video-box {
+  float: right;
+  height: 500px;
+  width: 75%;
+  background-color: black;
+  border: 2px solid black;
+}
+
+button {
+  position: relative;
+  margin: 15px auto;
+  display: block;
+  height: 40px;
+  width: 120px;
+  border-radius: 5px;
+  background-color: lightgray;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: darkgray;
+}

@@ -4,7 +4,7 @@
     var $counter = 0;
     $user_id = ''
     function vlineShell(serviceId, elem) {
-      
+      this.calls_ = [];
       $client = vline.Client.create({"serviceId": serviceId});
       
     
@@ -67,12 +67,26 @@
     });
 
     // The Call object tracks the lifecycle of the mediaSession
-    // this.calls_.push(new Call(this.term_, mediaSession));
+    this.calls_.push(new Call(mediaSession));
   }
 
   function removeMediaSession_(mediaSession) {
     // Clean up call list when call ends
     this.calls_.splice(this.calls_.indexOf(mediaSession), 1);
+  }
+
+  function Call(mediaSession) {
+    mediaSession.on('enterState:incoming', onEnterIncoming, this);
+
+    function onEnterIncoming() {
+      var accept = confirm('Incoming call from ' + mediaSession.getDisplayName() + " accept?");
+      if (accept == true) {
+        mediaSession.start();
+      } else {
+        mediaSession.stop();
+      }
+    }
+
   }
 
 

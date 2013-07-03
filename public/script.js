@@ -1,9 +1,9 @@
 
 
-    var $client, $session, $remote_client, $user_id;
+    var $client, $session, $remote_client, $user_id, $message;
     var $counter = 0;
     $user_id = ''
-    function vlineShell(serviceId, elem) {
+    function vlineShell(serviceId) {
       this.calls_ = [];
       $client = vline.Client.create({"serviceId": serviceId, "uiBigGreenArrow": true});
       
@@ -13,15 +13,14 @@
         if($('#Login').text() == "Login") {
           return $client.login(serviceId).done(function(session) {
             $session = session;
-            $client.on('add:mediaSession', onAddMediaSession, self).
+            $client.on('recv:im', onIm, self).on('add:mediaSession', onAddMediaSession, self).
             on('remove:mediaSession', onRemoveMediaSession, self);
-            var person = $session.getLocalPerson();
-            // console.log('Logged in as ' + person.getDisplayName());
             $(this).text('Logout');
             }, this);
         }  else if ($('#Login').text() == "Logout"){
             $session = null;
             $(this).text("Login");
+            $user_id = '';
             return $client.logout();
         }
     });
@@ -35,6 +34,12 @@
         var mediaSession = event.target;
         removeMediaSession_(mediaSession);
       }
+
+      function onIm(event) {
+        var msg = event.message,
+            sender = msg.getSender()
+            confirm(sender.getDisplayName() + " says: " + msg.getBody(false));
+        }
 
        // HELPERS
   //
@@ -93,7 +98,7 @@
 
     $('#Call').click(function() {
         if($('#Call').text() == "Call") {
-            $user_id = prompt("Please enter the User Id")
+            setUser();
             $session.getPerson($user_id).
                 done(function(person) {
                   $remote_client = person;
@@ -112,8 +117,20 @@
             
         }
             
-});
+    });
+
+    function setUser() {
+        if($user_id == '' || $user_id == null) {
+            $user_id = prompt("Please enter the User Id");
+        } 
+    }
+
+    $('#Message').click(function() {
+        setUser();
+        $message = prompt("Please type your message below");
+        $session.postMessage($user_id, $message);
+    });
 
     }
 
-    vlineShell('powspace', 'video');
+    vlineShell('powspace');

@@ -82,6 +82,7 @@
       var accept = confirm('Incoming call from ' + mediaSession.getDisplayName() + " accept?");
       if (accept == true) {
         mediaSession.start();
+        $('#Call').text('End Call');
       } else {
         mediaSession.stop();
       }

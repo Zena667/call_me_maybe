@@ -5,7 +5,7 @@
     $user_id = ''
     function vlineShell(serviceId, elem) {
       this.calls_ = [];
-      $client = vline.Client.create({"serviceId": serviceId});
+      $client = vline.Client.create({"serviceId": serviceId, "uiBigGreenArrow": true});
       
     
 

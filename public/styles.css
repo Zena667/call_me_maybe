@@ -1,10 +1,15 @@
+body {
+  background-color: #1d7373;
+}
+
 h1 {
   position: relative;
   font-size: 40px;
+  color: white;
 }
 
 #container {
-  background-color: white;
+  /*background-color: #1d7373;*/
   margin: auto;
   height: 600px;
   width: 900px;
@@ -14,7 +19,7 @@ h1 {
   float: left;
   height: 500px;
   width: 20%;
-  background-color: pink;
+  background-color: #009999;
 }
 
 .video_screen {
@@ -28,14 +33,14 @@ h1 {
   position: absolute;
   height: 500px;
   width: 667px;
-  background-color: black;
+  background-color: #ffbf40;
 }
 
 .small_video {
   position: absolute; right: 0;
   height: 150px;
   width: 200px;
-  background-color: green;
+  /*background-color: black;*/
   z-index: 1;
 }
 

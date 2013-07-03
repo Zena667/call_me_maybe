@@ -2,7 +2,7 @@
 
     var $client, $session, $remote_client, $user_id;
     var $counter = 0;
-    $user_id = 'powspace:ebt1fp76cv2mozrn'
+    $user_id = ''
     function vlineShell(serviceId, elem) {
       
       $client = vline.Client.create({"serviceId": serviceId});
@@ -78,6 +78,7 @@
 
     $('#Call').click(function() {
         if($('#Call').text() == "Call") {
+            $user_id = prompt("Please enter the User Id")
             $session.getPerson($user_id).
                 done(function(person) {
                   $remote_client = person;

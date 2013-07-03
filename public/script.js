@@ -36,9 +36,10 @@
       }
 
       function onIm(event) {
-        var msg = event.message,
-            sender = msg.getSender()
+        var msg = event.message;
+        var sender = msg.getSender();
             confirm(sender.getDisplayName() + " says: " + msg.getBody(false));
+            console.log("hello");
         }
 
        // HELPERS

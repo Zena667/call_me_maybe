@@ -77,16 +77,25 @@
 
 
     $('#Call').click(function() {
+        if($('#Call').text() == "Call") {
             $session.getPerson($user_id).
-        done(function(person) {
-            $remote_client = person;
-            $session.startMedia($user_id).done(function() {
-            });
-            person.release();
+                done(function(person) {
+                  $remote_client = person;
+                   $session.startMedia($user_id).done(function() {
+                    $('#Call').text('End Call');
+                });
+                person.release();
+
             // console.log(person.getDisplayName());
     // Got remote person
     // You can now send messages and make calls
-    });
+            });
+        } else if ($('#Call').text() == "End Call") {
+            $('#Call').text('Call');
+            $client.stopMediaSessions();
+            
+        }
+            
 });
 
     }
